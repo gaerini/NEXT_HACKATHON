@@ -33,3 +33,12 @@ class Game(models.Model):
 
     def __str__(self):
         return f'Game {self.type}'
+
+class GameRoom(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    user1 = models.ForeignKey(User, related_name='user1', on_delete=models.CASCADE)
+    user2 = models.ForeignKey(User, related_name='user2', on_delete=models.CASCADE)
+    state = models.BooleanField()
+
+    def __str__(self):
+        return f'GameRoom: {self.game} | User1: {self.user1.username} | User2: {self.user2.username}'
